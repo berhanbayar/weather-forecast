@@ -1,6 +1,7 @@
 # WeatherCheck
 
-<img src="assets/logo.png" alt="WeatherCheck Logo" width="200">
+<!-- <img src="assets/" alt="WeatherCheck Logo" width="200"> -->
+![WeatherCheckLogo](/assets/logo-medium.jpg)
 
 WeatherCheck is a web application that allows users to check the weather conditions for cities all around the world.
 
