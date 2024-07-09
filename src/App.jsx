@@ -5,6 +5,7 @@ import Inputs from './components/Inputs';
 import TimeAndLocation from './components/TimeAndLocation';
 import TempAndDetails from './components/TempAndDetails';
 import { useState } from 'react';
+import Forecast from './components/Forecast';
 
 
 const App = () => {
@@ -16,6 +17,7 @@ const App = () => {
 
       <TimeAndLocation/>
       <TempAndDetails/>
+      <Forecast/>
       {/* <h1 className='text-7xl font-bold'>deneme</h1>
       <FaReact size={50} className='text-red-400'></FaReact> */}
     </div>
