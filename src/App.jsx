@@ -11,12 +11,7 @@ import getFormattedWeatherData from '../services/weatherservice';
 
 
 const App = () => {
-  const getWeather = async () => {
-    const data = await getFormattedWeatherData({q: "Istanbul"}, {aqi: "no"});
-    console.log(data);
-  }
-
-  getWeather();
+  
 
   return (
     <div className='mx-auto max-w-screen-lg mt-4 py-5 px-32 bg-gradient-to-br shadow-xl

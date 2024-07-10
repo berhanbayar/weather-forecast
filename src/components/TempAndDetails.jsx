@@ -3,54 +3,69 @@ import { BiSolidDropletHalf } from 'react-icons/bi'
 import { FaFirstOrder, FaFistRaised, FaThermometerEmpty, FaWind } from 'react-icons/fa'
 import { GiSunrise, GiSunset} from 'react-icons/gi' 
 import { MdKeyboardArrowUp, MdKeyboardArrowDown} from 'react-icons/md' 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import getWeatherData from '../../services/weatherservice';
 
 const TempAndDetails = () => {
+    // const [verticalValues, setVerticalValues] = useState(null);
+    // const [horizontalValues, setHorizontalValues] = useState(null);
+   
+    const [data, setData] = useState(null);
+    const [error, setError] = useState(null);
+
+    const getWeather = async () => {
+        const weatherData = await getWeatherData('current.json', { q: "Istanbul", aqi: "no" });
+        if (weatherData) {
+            console.log("datasssss --> ",weatherData);
+
+            setData(weatherData);
+        } else {
+            setError("Failed to fetch weather data");
+        }
+    }
+
+    useEffect(() => {
+        getWeather();
+        console.log("data --> ",data);
+    }, [data]);
+    
     const [verticalDetails, setVerticalDetails] = useState([
         {
-            id: 1,
-            Icon: FaThermometerEmpty,
-            title: "Hissedilen",
-            value: "34°"
+            id:1,
+            Icon:FaThermometerEmpty,
+            title:"Hissedilen"
         },
         {
-            id: 2,
-            Icon: BiSolidDropletHalf,
-            title: "Nem Oranı",
-            value: "346%"
+            id:2,
+            Icon:BiSolidDropletHalf,
+            title:"Günbatımı"
         },
         {
-            id: 3,
-            Icon: FaWind,
-            title: "Rüzgar",
-            value: "12 km/s"
-        },
+            id:3,
+            Icon:FaWind,
+            title:"En Yüksek"
+        }
     ]);
-
     const [horizontalDetails, setHorizontalDetails] = useState([
         {
             id:1,
             Icon:GiSunrise,
-            title:"Gündoğuşu",
-            value:"06.30"
+            title:"Gündoğuşu"
         },
         {
             id:2,
             Icon:GiSunset,
-            title:"Günbatımı",
-            value:"20.30"
+            title:"Günbatımı"
         },
         {
             id:3,
             Icon: MdKeyboardArrowUp,
-            title:"En Yüksek",
-            value:"30°"
+            title:"En Yüksek"
         },
         {
             id:4,
             Icon:MdKeyboardArrowDown,
-            title:"En Düşük",
-            value:"16°"
+            title:"En Düşük"
         }
     ]);
 
@@ -74,6 +89,7 @@ const TempAndDetails = () => {
                     ))}
                 </div>
             </div>
+            {/* HORIZONTAL DETAILS */}
             <div className='flex flex-row items-center space-x-10 text-sm py-3 justify-center'>
                 {horizontalDetails.map(({id, Icon, title, value}) => (
                     <div key={id} className='flex flex-row items-center'>
