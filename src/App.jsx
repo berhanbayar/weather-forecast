@@ -7,11 +7,12 @@ import TempAndDetails from './components/TempAndDetails';
 import { useState } from 'react';
 import Forecast from './components/Forecast';
 import getWeatherData from '../services/weatherservice';
+import getFormattedWeatherData from '../services/weatherservice';
 
 
 const App = () => {
   const getWeather = async () => {
-    const data = await getWeatherData('current.json', {q: "Istanbul"}, {aqi: "no"});
+    const data = await getFormattedWeatherData({q: "Istanbul"}, {aqi: "no"});
     console.log(data);
   }
 
@@ -26,8 +27,7 @@ const App = () => {
       <TimeAndLocation/>
       <TempAndDetails/>
       <Forecast/>
-      {/* <h1 className='text-7xl font-bold'>deneme</h1>
-      <FaReact size={50} className='text-red-400'></FaReact> */}
+      
     </div>
   )
 }
