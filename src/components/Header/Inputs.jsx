@@ -9,7 +9,7 @@ const Inputs = ({setQuery}) => {
 
    const handleChange = (e) => {
     const { value } = e.target;
-    const regex = /^[a-zA-Z]*$/; // Yalnızca İngilizce harfler için regex
+    const regex = /^[a-zA-Z\s]*$/; // Yalnızca İngilizce harfler için regex
     if (regex.test(value)) {
       setInputValue(value);
     }
