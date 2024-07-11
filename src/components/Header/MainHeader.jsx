@@ -1,11 +1,11 @@
 import React from 'react'
 import Inputs from './Inputs'
 import TopButtons from './TopButtons'
-function MainHeader() {
+function MainHeader({setQuery}) {
   return (
     <div>
-        <Inputs/>
-        <TopButtons/>
+        <Inputs setQuery={setQuery}/>
+        <TopButtons setQuery={setQuery}/>
     </div>
   )
 }

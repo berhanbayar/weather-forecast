@@ -13,7 +13,7 @@ const App = () => {
   const [error, setError] = useState(null);
 
   const getWeather = async () => {
-    const weatherData = await getWeatherData('forecast.json', { q: "Istanbul", days: "1", aqi: "no", alerts: "no" });
+    const weatherData = await getWeatherData('forecast.json', {q: query.q, days: "1", aqi: "no", alerts: "no" });
     if (weatherData) {
       setData(weatherData);
     } else {
@@ -29,7 +29,7 @@ const App = () => {
   return (
     <div className='mx-auto max-w-screen-lg mt-4 py-5 px-32 bg-gradient-to-br shadow-xl
      shadow-gray-400 from-cyan-600 to-blue-700'>
-      <MainHeader data={data}/>
+      <MainHeader data={data} setQuery={setQuery} />
       <MainContent data={data}/>
       {/* <Forecast/> */}
       
