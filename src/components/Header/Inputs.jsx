@@ -1,39 +1,50 @@
 import { useState } from "react";
 import {BiSearch, BiCurrentLocation} from "react-icons/bi";
 
+
+
 const Inputs = ({setQuery}) => {
    
    const [inputValue, setInputValue] = useState('');
 
-   
-   const handleChange = (event) => {
-     setInputValue(event.target.value);
+   const handleChange = (e) => {
+    const { value } = e.target;
+    const regex = /^[a-zA-Z]*$/; // Yalnızca İngilizce harfler için regex
+    if (regex.test(value)) {
+      setInputValue(value);
+    }
    };
 
-  function handleButtonClick(params) {
-    setQuery({q: params});
+   function handleKeyDown (event) {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      handleButtonClick(inputValue);
+    }
+  };
+
+  function handleButtonClick(input) {
+    setQuery({q: input});
   }
 
   return (
-    <div className='flex flex-row justify-center my-6'>
-        <div className='flex flex-row w-3/4 items-center justify-center space-x-4'>
-            <input 
+    <div className='flex flex-col items-center my-6 px-4 sm:px-6 md:px-8 lg:px-12'>
+    <div className='flex flex-col sm:flex-row w-full sm:w-3/4 items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4'>
+        <input 
             type="text" 
-            placeholder='aradığınız şehiri girin...'
+            placeholder='Enter the city you are looking for...'
             value={inputValue}
-            onChange={handleChange} 
-            className='text-gray-500 text-xl font-light p-2 w-full shadow-xl capitalize focus:outline-none placeholder:lowercase'/>
-
-            <BiSearch onClick={() => handleButtonClick(inputValue)} size={30} className="cursor-pointer transition ease-out hover:scale-125"></BiSearch> 
-            <BiCurrentLocation size={30} className="cursor-pointer transition ease-out hover:scale-125"></BiCurrentLocation>
-        </div>
-
-        <div className="flex flex-row w-1/4 items-center justify-center">
-            <button className="text-2xl font-medium transition ease-out hover:scale-125">°C</button>
-            <p className="text-2xl font-medium mx-1">|</p>
-            <button className="text-2xl font-medium transition ease-out hover:scale-125">°F</button>
-        </div>
+            onChange={handleChange}
+            onKeyDown={handleKeyDown}
+            className='text-gray-500 text-base sm:text-xl font-light p-2 w-full shadow-xl focus:outline-none'
+        />
+        <BiSearch 
+            onClick={() => handleButtonClick(inputValue)} 
+            size={24} 
+            className="cursor-pointer transition ease-out hover:scale-110"
+        />
     </div>
+</div>
+
   )
 }
 

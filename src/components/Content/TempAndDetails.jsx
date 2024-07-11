@@ -1,8 +1,8 @@
 import React from 'react'
 import { BiSolidDropletHalf } from 'react-icons/bi'
 import { FaFirstOrder, FaFistRaised, FaThermometerEmpty, FaWind } from 'react-icons/fa'
-import { GiSunrise, GiSunset} from 'react-icons/gi' 
-import { MdKeyboardArrowUp, MdKeyboardArrowDown} from 'react-icons/md' 
+import { GiSunrise, GiSunset } from 'react-icons/gi'
+import { MdKeyboardArrowUp, MdKeyboardArrowDown } from 'react-icons/md'
 import { useState, useEffect } from 'react'
 import getWeatherData from '../../../services/weatherservice';
 
@@ -69,7 +69,7 @@ const TempAndDetails = ({ data }) => {
                 humidity: '%' + data?.current?.humidity,
                 windSpeed: data?.current?.wind_kph + ' km/h'
             };
-            
+
 
             setHorizontalDetails([
                 {
@@ -122,35 +122,31 @@ const TempAndDetails = ({ data }) => {
     }, [data]);
 
     return (
-        <div>
-            <div className='flex items-center justify-center py-6 text-xl text-cyan-300'>
+        <div className='mx-auto max-w-screen-lg px-4 sm:px-6 md:px-8 lg:px-16 xl:px-32'>
+            <div className='flex flex-col items-center justify-center py-6 text-xl text-cyan-300'>
                 <p>{data?.current?.condition?.text}</p>
             </div>
             {/* VERTICAL DETAILS */}
-            <div className='flex flex-row items-end justify-between py-3'>
-                <img src={weatherConditionIcon} alt="weather icon" className='ml-4'/>
-                
-                <p className='text-8xl ml-20'>{data?.current.temp_c}°</p>
-                
-
-                <div className='flex flex-col space-y-2  items-start'>
-                    {verticalDetails.map(({id, Icon, title, value}) => (
+            <div className='flex flex-col lg:flex-row items-center lg:items-end justify-center lg:justify-between py-3'>
+                <img src={weatherConditionIcon} alt="weather icon" className='w-24 h-24 mb-4 lg:mb-0 lg:ml-4' />
+                <p className='text-4xl lg:text-8xl mb-4 lg:mb-0 lg:ml-4'>{data?.current.temp_c}°</p>
+                <div className='flex flex-col space-y-2 items-center lg:items-start'>
+                    {verticalDetails.map(({ id, Icon, title, value }) => (
                         <div key={id} className='flex items-center'>
-                            <Icon className='flex mr-1'size={20}></Icon>
+                            <Icon className='flex mr-1' size={20}></Icon>
                             <p className='font-semibold mr-2'>{title}</p>
                             <span className='font-medium'>{value}</span>
                         </div>
                     ))}
                     <div className='flex items-center'>
-                        {/* <Icon className='flex mr-1' size={20}></Icon> */}
                         <p className='font-semibold mr-2'>{data?.current?.location?.name}</p>
                         <span className='font-medium'>{data?.current?.location?.name}</span>
                     </div>
                 </div>
             </div>
             {/* HORIZONTAL DETAILS */}
-            <div className='flex flex-row items-center space-x-10 text-sm py-3 justify-center'>
-                {horizontalDetails.map(({id, Icon, title, value}) => (
+            <div className='flex flex-col lg:flex-row items-center space-y-2 lg:space-y-0 lg:space-x-10 text-sm py-3 justify-center'>
+                {horizontalDetails.map(({ id, Icon, title, value }) => (
                     <div key={id} className='flex flex-row items-center'>
                         <Icon className='flex mr-1' size={30}></Icon>
                         <p className='font-semibold mr-2'>{title}</p>
@@ -159,7 +155,6 @@ const TempAndDetails = ({ data }) => {
                 ))}
             </div>
         </div>
-        
     );
 }
 

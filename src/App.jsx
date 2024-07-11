@@ -27,13 +27,12 @@ const App = () => {
   }, [query, units]);
 
   return (
-    <div className='mx-auto max-w-screen-lg mt-4 py-5 px-32 bg-gradient-to-br shadow-xl
-     shadow-gray-400 from-cyan-600 to-blue-700'>
+
+    <div className='mx-auto max-w-screen-lg mt-4 py-5 px-4 sm:px-6 md:px-8 lg:px-16 xl:px-32 bg-gradient-to-br shadow-xl shadow-gray-400 from-cyan-600 to-blue-700'>
       <MainHeader data={data} setQuery={setQuery} />
-      <MainContent data={data}/>
-      {/* <Forecast/> */}
-      
+      <MainContent data={data} />
     </div>
+
   )
 }
 
