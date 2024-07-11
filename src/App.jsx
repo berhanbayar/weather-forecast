@@ -1,27 +1,37 @@
 import React from 'react'
+import { useState, useEffect } from 'react';
 import { FaReact } from "react-icons/fa";
-import TopButtons from './components/TopButtons';
-import Inputs from './components/Inputs';
-import TimeAndLocation from './components/TimeAndLocation';
-import TempAndDetails from './components/TempAndDetails';
-import { useState } from 'react';
-import Forecast from './components/Forecast';
 import getWeatherData from '../services/weatherservice';
-import getFormattedWeatherData from '../services/weatherservice';
+import MainContent from './components/Content/MainContent';
+import MainHeader from './components/Header/MainHeader';
 
 
 const App = () => {
-  
+  const [query, setQuery] = useState({q: "Istanbul"});
+  const [units, setUnits] = useState("metric");
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
+
+  const getWeather = async () => {
+    const weatherData = await getWeatherData('forecast.json', { q: "Istanbul", days: "1", aqi: "no", alerts: "no" });
+    if (weatherData) {
+      setData(weatherData);
+    } else {
+      setError("Failed to fetch weather data");
+    }
+  }
+
+  useEffect(() => {
+      getWeather();
+      console.log("data", data);
+  }, [query, units]);
 
   return (
     <div className='mx-auto max-w-screen-lg mt-4 py-5 px-32 bg-gradient-to-br shadow-xl
      shadow-gray-400 from-cyan-600 to-blue-700'>
-      <TopButtons />
-      <Inputs/>
-
-      <TimeAndLocation/>
-      <TempAndDetails/>
-      <Forecast/>
+      <MainHeader data={data}/>
+      <MainContent data={data}/>
+      {/* <Forecast/> */}
       
     </div>
   )

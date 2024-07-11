@@ -20,11 +20,11 @@ const TimeAndLocation = ({ data }) => {
     <div>
         <div className="flex items-center justify-center my-6">
             <p className="text-xl font-extralight">
-                {formatDateTime(data?.location?.localtime)} | {data?.location?.name}
+                {formatDateTime(data?.location?.localtime)}
             </p>
         </div>
         <div className="flex items-center justify-center my-6">
-            <p className="text-3xl font-medium">{data?.location?.name}</p>
+            <p className="text-3xl font-medium">{data?.location?.name} | {data?.location?.country}</p>
         </div>
     </div>
   )
